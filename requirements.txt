@@ -1,0 +1,5 @@
+requests
+faiss-cpu
+sentence-transformers
+langchain
+huggingface-hub
