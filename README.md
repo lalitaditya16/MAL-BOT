@@ -2,10 +2,10 @@
 Recommending your next favorite ANIME
 
 
-First Stage 
+_First Stage _
 
-This a friendly chatbot that is primarily to recommend ANIME/MANGA titles based on your preferences,Makes use of the MISTRAL(LLM) AND MAL(Anime database API.
+This a friendly chatbot that is primarily to recommend ANIME/MANGA titles based on your preferences,Makes use of the **MISTRAL**(LLM) AND **MAL**(Anime database API.
 
-Next stages to be planned.
+_Next stages to be planned._
 
-HOPE YOU EXPERIENCE PEAK
+**HOPE YOU EXPERIENCE PEAK**
