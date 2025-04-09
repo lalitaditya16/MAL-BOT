@@ -1,5 +1,6 @@
 # main.py
-
+import os
+api_key = ""
 from llm_chain import get_mistral_llm, get_recommendation_chain
 
 # Define the API URL and API key
