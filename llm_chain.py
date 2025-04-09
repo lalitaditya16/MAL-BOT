@@ -5,8 +5,7 @@ from langchain.memory import ConversationBufferMemory
 
 # Function to initialize Mistral LLM from HuggingFace Endpoint
 def get_mistral_llm(api_url, api_key):
-    return HuggingFaceEndpoint(
-        repo_id="mistralai/Mistral-7B-Instruct-v0.1",  # You can use any compatible model here
+    return HuggingFaceEndpoint(  # You can use any compatible model here
         endpoint_url=api_url,
         huggingfacehub_api_token=api_key,
         temperature=0.7  # Control response creativity
