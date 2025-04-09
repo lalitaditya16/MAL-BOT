@@ -1,6 +1,6 @@
 # main.py
 import os
-api_key = ""
+api_key = os.getenv("HUGGINGFACE_API_KEY")
 from llm_chain import get_mistral_llm, get_recommendation_chain
 
 # Define the API URL and API key
