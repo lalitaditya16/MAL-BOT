@@ -5,3 +5,5 @@ langchain
 huggingface-hub
 langchain-community
 streamlit
+requests
+python-dotenv
