@@ -16,11 +16,11 @@ chain = get_recommendation_chain(llm)
 # Now you can use `chain` to process user input and generate anime recommendations
 # Example (using chain to generate a recommendation):
 # response = chain.run(user_input="What anime should I watch if I like action and adventure?")
-user_input = input("🎌 Tell me what kind of anime you like: ")
+user_input = "I like action-packed anime with strong female leads."
 
 # Run the chain
 response = chain.invoke({"input": user_input})
 
-# Show the results
+# Print the result
 print("\n🤖 Recommended Anime:\n")
 print(response["text"] if isinstance(response, dict) else response)
