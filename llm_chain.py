@@ -4,11 +4,14 @@ from langchain.llms import HuggingFaceEndpoint
 from langchain.memory import ConversationBufferMemory
 
 # Function to initialize Mistral LLM from HuggingFace Endpoint
-def get_mistral_llm(api_url, api_key):
-    return HuggingFaceEndpoint(  # You can use any compatible model here
-        endpoint_url=api_url,
-        huggingfacehub_api_token=api_key,
-        temperature=0.7  # Control response creativity
+def get_mistral_llm(api_url: str, api_key: str):
+    from langchain_community.llms import HuggingFaceEndpoint
+
+    return HuggingFaceEndpoint(
+        api_url=api_url,
+        api_key=api_key,
+        task="text-generation",  # ✅ This fixes the ValueError
+        model_kwargs={"temperature": 0.7},
     )
 
 # Function to get LangChain recommendation chain with memory
