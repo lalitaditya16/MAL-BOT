@@ -5,15 +5,11 @@ from langchain.memory import ConversationBufferMemory
 
 # Function to initialize Mistral LLM from HuggingFace Endpoint
 def get_mistral_llm(api_url: str, api_key: str):
-    from langchain_community.llms import HuggingFaceEndpoint
-
     return HuggingFaceEndpoint(
+        endpoint_url=api_url,
+        huggingfacehub_api_token=api_key,
         task="text-generation",
-        model_kwargs={
-            "temperature": 0.7,
-            "api_key": api_key,
-            "api_url": api_url
-        }
+        temperature=0.7
     )
 # Function to get LangChain recommendation chain with memory
 def get_recommendation_chain(llm):
