@@ -14,8 +14,7 @@ API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Inst
 API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 
 # Check if the API URL and API Key are available
-if not API_URL or not API_KEY:
-    raise ValueError("API URL and API Key must be set in .env file")
+
 
 # Setup the LLM with Hugging Face API
 def get_mistral_llm(api_url: str, api_key: str):
