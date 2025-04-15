@@ -8,12 +8,13 @@ def get_mistral_llm(api_url: str, api_key: str):
     from langchain_community.llms import HuggingFaceEndpoint
 
     return HuggingFaceEndpoint(
-        api_url=api_url,
-        api_key=api_key,
-        task="text-generation",  # ✅ This fixes the ValueError
-        model_kwargs={"temperature": 0.7},
+        task="text-generation",
+        model_kwargs={
+            "temperature": 0.7,
+            "api_key": api_key,
+            "api_url": api_url
+        }
     )
-
 # Function to get LangChain recommendation chain with memory
 def get_recommendation_chain(llm):
     # Create memory buffer to store conversation history
