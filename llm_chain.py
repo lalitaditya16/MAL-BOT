@@ -4,31 +4,32 @@ from langchain.llms import HuggingFaceEndpoint
 from langchain.memory import ConversationBufferMemory
 
 # Function to initialize Mistral LLM from HuggingFace Endpoint
-def get_falcon_llm(api_url: str, api_key: str):
+def get_flan_llm():
     return HuggingFaceEndpoint(
-        endpoint_url=api_url,
-        huggingfacehub_api_token=api_key, # <-- THIS IS IMPORTANT
-        temperature=0.7
+        repo_id="google/flan-t5-base",
+        temperature=0.7,
+        huggingfacehub_api_token=os.getenv("HUGGINGFACE_API_KEY"),
     )
-# Function to get LangChain recommendation chain with memory
 def get_recommendation_chain(llm):
     # Create memory buffer to store conversation history
     memory = ConversationBufferMemory(memory_key="chat_history", input_key="user_input")
 
-    # Define the prompt template
+    # Define a Flan-T5-friendly prompt template
     prompt = PromptTemplate(
         input_variables=["chat_history", "user_input", "anime_list"],
         template="""
-The following is a conversation between a user and an anime recommendation assistant.
-Conversation history:
+You are an anime recommendation assistant.
+
+Here is the conversation so far:
 {chat_history}
 
-User input: "{user_input}"
+The user said: "{user_input}"
 
-Here are some anime recommendations based on the query:
+Based on this, here are some suggested anime:
 {anime_list}
 
-Give a warm, friendly explanation about why these anime were recommended.
+Now, explain in a friendly, conversational way why these anime were recommended. 
+Mention any themes, tone, or plot similarities. Make the user feel excited to watch them!
 """
     )
 
