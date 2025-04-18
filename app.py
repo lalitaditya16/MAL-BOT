@@ -5,7 +5,7 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferMemory
 from dotenv import load_dotenv
-from llm_chain import get_falcon_llm, get_recommendation_chain
+from llm_chain import get_flan_llm, get_recommendation_chain
 
 
 
@@ -17,17 +17,17 @@ API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 
 
 # Setup the LLM with Hugging Face API
-def get_falcon_llm(api_url: str, api_key: str):
+def get_flan_llm(api_url: str, api_key: str):
     from langchain_community.llms import HuggingFaceEndpoint
 
     return HuggingFaceEndpoint(
         api_url=api_url,
         api_key=api_key,
-        repo_id="mistralai/Mistral-7B-Instruct-v0.1",  # Use appropriate model here
+        repo_id=""google/flan-t5-base"",  # Use appropriate model here
         temperature=0.7,
     )
 
-llm = get_falcon_llm(API_URL, API_KEY)
+llm = get_flan_llm(API_URL, API_KEY)
 
 # Setup memory to store the conversation
 memory = ConversationBufferMemory(memory_key="chat_history", input_key="user_input")
