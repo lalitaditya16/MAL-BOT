@@ -8,7 +8,7 @@ TEMP_API_KEY = ""  # Replace with your actual Hugging Face API key
 TEMP_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1"
 
 # Initialize the LLM with the API URL and API key passed as parameters
-llm = get_mistral_llm(api_url=TEMP_API_URL, api_key=TEMP_API_KEY)
+llm = get_falcon_llm(api_url=TEMP_API_URL, api_key=TEMP_API_KEY)
 
 # Create the recommendation chain with memory
 chain = get_recommendation_chain(llm)
