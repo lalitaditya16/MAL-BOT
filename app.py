@@ -10,7 +10,7 @@ from llm_chain import get_falcon_llm, get_recommendation_chain
 
 
 # Retrieve API URL and API Key from environment variables
-API_URL = "https://api-inference.huggingface.co/models/tiiuae/falcon-7b-instruct"
+API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-base"
 API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 
 # Check if the API URL and API Key are available
