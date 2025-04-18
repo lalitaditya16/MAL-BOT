@@ -17,7 +17,7 @@ API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 
 
 # Setup the LLM with Hugging Face API
-def get_mistral_llm(api_url: str, api_key: str):
+def get_falcon_llm(api_url: str, api_key: str):
     from langchain_community.llms import HuggingFaceEndpoint
 
     return HuggingFaceEndpoint(
@@ -27,7 +27,7 @@ def get_mistral_llm(api_url: str, api_key: str):
         temperature=0.7,
     )
 
-llm = get_mistral_llm(API_URL, API_KEY)
+llm = get_falcon_llm(API_URL, API_KEY)
 
 # Setup memory to store the conversation
 memory = ConversationBufferMemory(memory_key="chat_history", input_key="user_input")
@@ -41,7 +41,7 @@ prompt = PromptTemplate(input_variables=["user_input"], template=prompt_template
 llm_chain = LLMChain(llm=llm, prompt=prompt, memory=memory)
 
 # Streamlit UI
-st.title("Anime Recommendation Chatbot")
+st.title("MAL-BOT")
 st.write("Tell me what kind of anime you like, and I will suggest a few based on your preferences!")
 
 # User input
