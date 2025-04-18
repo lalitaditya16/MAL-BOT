@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 
 # Retrieve API URL and API Key from environment variables
-API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1"
+API_URL = "https://api-inference.huggingface.co/models/tiiuae/falcon-7b-instruct"
 API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 
 # Check if the API URL and API Key are available
