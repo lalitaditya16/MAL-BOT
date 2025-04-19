@@ -4,18 +4,14 @@ from langchain_community.llms import HuggingFaceEndpoint
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferMemory
-from dotenv import load_dotenv
 from llm_chain import get_flan_llm, get_recommendation_chain
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Fetch API key and URL from environment variables
+# Fetch API key and URL from environment variables (you already set the secret key)
 api_key = os.getenv("HUGGINGFACE_API_KEY")
 api_url = "https://api-inference.huggingface.co/models/google/flan-t5-base"
 
 if not api_key:
-    st.error("API Key not found! Please check your .env file.")
+    st.error("API Key not found! Please ensure the secret key is correctly set.")
 else:
     # Initialize the LLM with the API URL and API key passed as parameters
     llm = get_flan_llm(api_url, api_key)
