@@ -18,13 +18,10 @@ API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 
 # Setup the LLM with Hugging Face APi
 def get_flan_llm(api_url: str, api_key: str):
-    from langchain_community.llms import HuggingFaceEndpoint
-
     return HuggingFaceEndpoint(
-        api_url=api_url,
-        api_key=api_key,
-        repo_id=""google/flan-t5-base"",  # Use appropriate model here
-        temperature=0.7,
+        endpoint_url=api_url,
+        huggingfacehub_api_token=api_key,
+        task="text2text-generation"
     )
 
 llm = get_flan_llm(API_URL, API_KEY)
