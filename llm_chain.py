@@ -4,7 +4,7 @@ from langchain_community.llms import HuggingFaceEndpoint
 from langchain.memory import ConversationBufferMemory
 import os
 # Function to initialize Mistral LLM from HuggingFace Endpoint
-def get_flan_llm():
+def get_flan_llm(api_url,api_key):
     return HuggingFaceEndpoint(
         repo_id="google/flan-t5-base",
         temperature=0.7,
