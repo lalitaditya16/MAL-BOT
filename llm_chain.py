@@ -13,6 +13,7 @@ def get_flan_llm(api_url, api_key):
     )
 
 # Function to create recommendation chain
+
 def get_recommendation_chain(llm):
     # Create memory buffer to store conversation history
     memory = ConversationBufferMemory(memory_key="chat_history", input_key="user_input")
