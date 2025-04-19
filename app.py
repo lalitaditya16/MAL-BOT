@@ -1,12 +1,11 @@
 import os
 import streamlit as st
-from langchain.llms import HuggingFaceEndpoint
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferMemory
 from dotenv import load_dotenv
 from llm_chain import get_flan_llm, get_recommendation_chain
-
+from langchain_community.llms import HuggingFaceEndpoint
 
 
 # Retrieve API URL and API Key from environment variables
