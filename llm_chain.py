@@ -1,15 +1,18 @@
-from langchain.chains import LLMChain
+import os
 from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
 from langchain_community.llms import HuggingFaceEndpoint
 from langchain.memory import ConversationBufferMemory
-import os
-# Function to initialize Mistral LLM from HuggingFace Endpoint
-def get_flan_llm(api_url,api_key):
+
+# Function to initialize Flan LLM from HuggingFace Endpoint
+def get_flan_llm(api_url, api_key):
     return HuggingFaceEndpoint(
         repo_id="google/flan-t5-base",
         temperature=0.7,
-        huggingfacehub_api_token=os.getenv("HUGGINGFACE_API_KEY"),
+        huggingfacehub_api_token=api_key,
     )
+
+# Function to create recommendation chain
 def get_recommendation_chain(llm):
     # Create memory buffer to store conversation history
     memory = ConversationBufferMemory(memory_key="chat_history", input_key="user_input")
