@@ -10,8 +10,7 @@ from llm_chain import get_flan_llm, get_recommendation_chain
 api_key = os.getenv("HUGGING_FACE_API_KEY")
 api_url = "https://api-inference.huggingface.co/models/google/flan-t5-base"
 
-if not api_key:
-    raise ValueError("API Key is missing! Please check your environment configuration.")
+
 
 # Initialize the LLM
 llm = HuggingFaceEndpoint(
