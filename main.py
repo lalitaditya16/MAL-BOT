@@ -4,7 +4,7 @@ api_key = os.getenv("HUGGINGFACE_API_KEY")
 from llm_chain import get_flan_llm, get_recommendation_chain
 
 # Define the API URL and API key
-TEMP_API_KEY = ""  # Replace with your actual Hugging Face API key
+TEMP_API_KEY = os.getenv("HUGGINGFACE_API_KEY")  # Replace with your actual Hugging Face API key
 TEMP_API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-base"
 
 # Initialize the LLM with the API URL and API key passed as parameters
