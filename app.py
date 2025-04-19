@@ -16,7 +16,7 @@ API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 # Check if the API URL and API Key are available
 
 
-# Setup the LLM with Hugging Face API
+# Setup the LLM with Hugging Face APi
 def get_flan_llm(api_url: str, api_key: str):
     from langchain_community.llms import HuggingFaceEndpoint
 
