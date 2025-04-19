@@ -17,14 +17,8 @@ API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 
 
 # Setup the LLM with Hugging Face APi
-def get_flan_llm(api_url: str, api_key: str):
-    return HuggingFaceEndpoint(
-        endpoint_url=api_url,
-        huggingfacehub_api_token=api_key,
-        task="text2text-generation"
-    )
 
-llm = get_flan_llm(API_URL, API_KEY)
+llm = get_flan_llm()
 
 # Setup memory to store the conversation
 memory = ConversationBufferMemory(memory_key="chat_history", input_key="user_input")
