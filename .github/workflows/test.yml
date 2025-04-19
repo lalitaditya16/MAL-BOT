@@ -28,4 +28,4 @@ jobs:
 
     - name: Run tests
       run: |
-        python main.py  # Replace with the script that runs your tests or code
+        python app.py  # Replace with the script that runs your tests or code
