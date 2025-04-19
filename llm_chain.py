@@ -2,7 +2,7 @@ from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain.llms import HuggingFaceEndpoint
 from langchain.memory import ConversationBufferMemory
-
+import os
 # Function to initialize Mistral LLM from HuggingFace Endpoint
 def get_flan_llm():
     return HuggingFaceEndpoint(
