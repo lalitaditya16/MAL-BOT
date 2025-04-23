@@ -7,7 +7,7 @@ from langchain.memory import ConversationBufferMemory
 # Function to initialize Flan LLM from HuggingFace Endpoint
 def get_flan_llm(api_url, api_key):
     return HuggingFaceEndpoint(
-        repo_id="google/flan-t5-base",
+        repo_id="google/flan-t5-large",
         task="text2text-generation",
         temperature=0.7,
         huggingfacehub_api_token=api_key,
