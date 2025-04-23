@@ -8,7 +8,7 @@ from llm_chain import get_flan_llm, get_recommendation_chain
 
 # Fetch API key from environment (set via secrets or manually for testing)
 api_key = os.getenv("HUGGING_FACE_API_KEY")
-api_url = "https://api-inference.huggingface.co/models/google/flan-t5-base"
+api_url = "https://api-inference.huggingface.co/models/google/flan-t5-large"
 
 
 
