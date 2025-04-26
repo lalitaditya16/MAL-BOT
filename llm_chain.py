@@ -1,37 +1,26 @@
 import os
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
-from langchain_community.llms import HuggingFaceEndpoint
-from langchain.memory import ConversationBufferMemory
+import streamlit as st
+from transformers import pipeline
 
-# Function to initialize Flan LLM from HuggingFace Endpoint
-def get_flan_llm(api_url, api_key):
-    return HuggingFaceEndpoint(
-        repo_id="deepseek-ai/DeepSeek-V3-0324",
-        task='text-generation',
-        temperature=0.7,
-        huggingfacehub_api_token=api_key,
-    )
+# Fetch API key from environment (set via GitHub Secrets or manually for testing)
+api_key = os.getenv("HUGGING_FACE_API_KEY")
+api_url = "https://api-inference.huggingface.co/models/deepseek-ai/DeepSeek-V3-0324"  # Correct API URL
 
-# Function to create recommendation chain
+# Initialize the pipeline directly from Hugging Face
+generator = pipeline("text-generation", model="deepseek-ai/DeepSeek-V3-0324", 
+                     api_key=api_key)
 
-def get_recommendation_chain(llm):
-    # Create memory buffer to store conversation history
-    memory = ConversationBufferMemory(memory_key="chat_history", input_key="user_input")
+# Streamlit UI
+st.title("MAL-BOT")
+st.write("Tell me what kind of anime you like, and I will suggest a few based on your preferences!")
 
-    # Define a prompt template for generating anime recommendations
-    prompt = PromptTemplate(
-        input_variables=["user_input", "chat_history"],
-        template="""
-You are an anime recommendation assistant.
+# User input
+user_input = st.text_input("🎌 What kind of anime do you like?")
 
-The user said: "{user_input}"
-
-Based on this, recommend some anime titles that align with the user's preferences.
-
-If you think some anime might be a great fit, mention why they would enjoy them based on the genres, themes, or tone.
-"""
-    )
-
-    # Create and return the LangChain with memory and the prompt
-    return LLMChain(llm=llm, prompt=prompt, memory=memory)
+if user_input:
+    # Run the generator to get a response
+    response = generator(user_input)
+    
+    # Display the response
+    st.write("🎬 Here is your anime recommendation:")
+    st.write(response[0]['generated_text'])
