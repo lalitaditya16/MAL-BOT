@@ -24,8 +24,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r requirements.txt  # This will install 'accelerate' from the requirements.txt
 
-    - name: Run tests
+    - name: Set Hugging Face API Key (if required)
+      run: echo "HUGGING_FACE_API_KEY=${{ secrets.HUGGING_FACE_API_KEY }}" >> $GITHUB_ENV
+
+    - name: Run the Streamlit app
       run: |
-        python app.py  # Replace with the script that runs your tests or code
+        streamlit run app.py  # This will run your Streamlit app, which uses the model for inference
+
