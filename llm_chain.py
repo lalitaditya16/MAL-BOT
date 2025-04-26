@@ -8,7 +8,7 @@ from langchain.memory import ConversationBufferMemory
 def get_flan_llm(api_url, api_key):
     return HuggingFaceEndpoint(
         repo_id="deepseek-ai/DeepSeek-V3-0324",
-        task='text-generation'
+        task='text-generation',
         temperature=0.7,
         huggingfacehub_api_token=api_key,
     )
