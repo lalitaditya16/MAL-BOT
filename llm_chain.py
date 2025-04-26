@@ -19,22 +19,17 @@ def get_recommendation_chain(llm):
     # Create memory buffer to store conversation history
     memory = ConversationBufferMemory(memory_key="chat_history", input_key="user_input")
 
-    # Define a Flan-T5-friendly prompt template
+    # Define a prompt template for generating anime recommendations
     prompt = PromptTemplate(
-        input_variables=["chat_history", "user_input", "anime_list"],
+        input_variables=["user_input", "chat_history"],
         template="""
 You are an anime recommendation assistant.
 
-Here is the conversation so far:
-{chat_history}
-
 The user said: "{user_input}"
 
-Based on this, here are some suggested anime:
-{anime_list}
+Based on this, recommend some anime titles that align with the user's preferences.
 
-Now, explain in a friendly, conversational way why these anime were recommended. 
-Mention any themes, tone, or plot similarities. Make the user feel excited to watch them!
+If you think some anime might be a great fit, mention why they would enjoy them based on the genres, themes, or tone.
 """
     )
 
