@@ -1,10 +1,10 @@
-### mal_faiss.py
+import os
 import requests
-from sentence_transformers import SentenceTransformer
-import faiss
 import numpy as np
+import faiss
+from sentence_transformers import SentenceTransformer
 
-token='ad5fae79dc18b1456281b2f63875bdea'
+token = os.getenv("MAL_TOKEN")
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
 def get_anime_list(token, limit=500):
@@ -15,8 +15,10 @@ def get_anime_list(token, limit=500):
         "limit": limit,
         "fields": "title,synopsis,genres"
     }
-    res = requests.get(url, headers=headers, params=params).json()
-    return [entry["node"] for entry in res["data"]]
+    res = requests.get(url, headers=headers, params=params)
+    if res.status_code != 200:
+        raise Exception(f"MAL API failed: {res.status_code} - {res.text}")
+    return [entry["node"] for entry in res.json().get("data", [])]
 
 def build_text(anime):
     synopsis = anime.get("synopsis", "")
@@ -30,11 +32,7 @@ def build_faiss_index(anime_list):
     index.add(embeddings)
     return index, texts, anime_list
 
-if __name__ == "__main__":
-    print("📡 Fetching anime from MAL...")
-    anime_list = get_anime_list()
-
-    # Build FAISS index from the anime data
-    index, texts, raw_anime_list = build_faiss_index(anime_list)
-
-    print("✅ FAISS index built with anime data.")
+def search_similar_anime(query, index, texts, anime_list, top_k=5):
+    query_vec = model.encode([query], convert_to_numpy=True)
+    distances, indices = index.search(query_vec, top_k)
+    return [anime_list[i] for i in indices[0]]
