@@ -6,7 +6,7 @@ from langchain.chat_models import ChatOpenAI
 
 def get_flan_llm(api_key=None):
     if api_key is None:
-        api_key = os.getenv("OPENAI_API_KEY")
+        api_key = st.secrets("OPEN_AI_API_KEY")
     return ChatOpenAI(model_name="gpt-3.5-turbo", openai_api_key=api_key, temperature=0.7)
 
 def get_recommendation_chain(llm):
