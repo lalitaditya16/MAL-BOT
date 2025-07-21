@@ -7,17 +7,14 @@ from langchain.memory import ConversationBufferMemory
 from llm_chain import get_flan_llm, get_recommendation_chain
 
 # Fetch API key from environment (set via secrets or manually for testing)
-api_key = os.getenv("HUGGING_FACE_API_KEY")
-api_url = "deepseek-ai/DeepSeek-V3-0324"
+api_key = st.sercrets("OPEN_API_KEY")
+
 
 
 
 # Initialize the LLM
-llm = HuggingFaceEndpoint(
-    repo_id="deepseek-ai/DeepSeek-V3-0324",
-    temperature=0.7,
-    huggingfacehub_api_token=api_key,
-)
+llm = ChatGroq(model="gemma2-9b-it", api_key=groq_api_key)
+
 
 # Initialize the recommendation chain
 chain = get_recommendation_chain(llm)
