@@ -1,27 +1,32 @@
 import os
-import streamlit as st
-from transformers import pipeline
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+from langchain.memory import ConversationBufferMemory
+from langchain.chat_models import ChatOpenAI
 
-# Fetch API key from environment (set via GitHub Secrets or manually for testing)
-api_key = st.secrets("OPEN_AI_API_KEY")
+def get_flan_llm(api_key=None):
+    if api_key is None:
+        api_key = os.getenv("OPENAI_API_KEY")
+    return ChatOpenAI(model_name="gpt-3.5-turbo", openai_api_key=api_key, temperature=0.7)
 
-llm = ChatGroq(model="gemma2-9b-it", api_key=groq_api_key)
-# Correct API URL
+def get_recommendation_chain(llm):
+    prompt = PromptTemplate(
+        input_variables=["chat_history", "user_input", "anime_list"],
+        template="""
+        You are an anime recommendation assistant. Based on the user's preference and the list of anime below,
+        suggest one or two anime that match their taste.
 
-# Initialize the pipeline directly from Hugging Face
+        Previous conversation:
+        {chat_history}
 
+        User likes:
+        {user_input}
 
-# Streamlit UI
-st.title("MAL-BOT")
-st.write("Tell me what kind of anime you like, and I will suggest a few based on your preferences!")
+        Available anime:
+        {anime_list}
 
-# User input
-user_input = st.text_input("🎌 What kind of anime do you like?")
-
-if user_input:
-    # Run the generator to get a response
-    response = generat(user_input)
-    
-    # Display the response
-    st.write("🎬 Here is your anime recommendation:")
-    st.write(response[0]['generated_text'])
+        Your recommendation:
+        """
+    )
+    memory = ConversationBufferMemory(memory_key="chat_history")
+    return LLMChain(llm=llm, prompt=prompt, memory=memory)
