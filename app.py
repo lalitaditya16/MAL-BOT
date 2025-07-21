@@ -4,7 +4,7 @@ from llm_chain import get_flan_llm, get_recommendation_chain
 from mal_faiss import get_anime_list, build_faiss_index, search_similar_anime
 
 # Load keys
-api_key = st.secrets.get("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY"))
+api_key = st.secrets.get("OPEN_AI_API_KEY")
 token = st.secrets.get("MAL_TOKEN", os.getenv("MAL_TOKEN"))
 
 # Setup LLM and chain
