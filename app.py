@@ -5,7 +5,7 @@ from mal_faiss import get_anime_list, build_faiss_index, search_similar_anime
 
 # Load keys
 api_key = st.secrets.get("OPEN_AI_API_KEY")
-token = st.secrets.get("MAL_TOKEN", os.getenv("MAL_TOKEN"))
+token = st.secrets.get("MAL_TOKEN")
 
 # Setup LLM and chain
 llm = get_flan_llm(api_key)
