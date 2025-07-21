@@ -9,3 +9,4 @@ python-dotenv
 transformers
 accelerate
 langchain-groq
+langchain-OpenAI
